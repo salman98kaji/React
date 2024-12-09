@@ -1,0 +1,2 @@
+const [state, setState] = useState(initialValue)
+state: current state value. setState: a function used to updatethe state. initialValue: the initial value of the state (can be a string, number, array, object or even null)
