@@ -1,8 +1,4 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+className="" attribute is used to apply CSS classes to an element. It allows you to use styles from external or inline CSS, including CSS libraries like Tailwind CSS, Bootstrap, etc.
+style={} attribute used to apply inline styles directly to an element.Accepts an object where keys are camelCase versions of CSS property names (e.g., backgroundColor instead of background-color). 
