@@ -7,10 +7,10 @@ import useCurrencyInfo from './hooks/useCurrencyInfo'
 
 function App() {
     
-    const [amount, setAmount] = useState(0)
-    const [from, setFrom] = useState('usd')
-    const [to, setTo] = useState('inr')
-    const [convertedAmt, setConvertedAmt] = useState(0) 
+    const [amount, setAmount] = useState(0)  //Tracks the input value (amount to be converted).
+    const [convertedAmt, setConvertedAmt] = useState(0)  //Tracks the converted amount.
+    const [from, setFrom] = useState('usd') //Stores the base currency
+    const [to, setTo] = useState('inr') //Stores the target currency 
     
     const currencyInfo = useCurrencyInfo(from)
     console.log('Currency Info:', currencyInfo);
@@ -18,10 +18,10 @@ function App() {
     const options = Object.keys(currencyInfo)
 
     const swap = () => {
-        setFrom(to)
-        setTo(from)
-        setConvertedAmt(amount)
-        setAmount(convertedAmt)
+        setFrom(to)                // Base currency becomes target currency
+        setTo(from)                // Target currency brcomes base currency
+        setConvertedAmt(amount)    //Preserve the previous amount as the converted amount
+        setAmount(convertedAmt)    //Swap the displayed amount and converted value
     } 
 
     const convert = () => {
@@ -34,18 +34,18 @@ function App() {
 
         <div className='w-full'>
 
-            <div className='w-full max-w-md mx-auto border border-gray-60 rounded-xl p-5 backdrop-blur-sm bg-white/30'>
+            <div className='w-full max-w-lg mx-auto border border-gray-60 rounded-xl p-5 backdrop-blur-sm bg-white/30'>
 
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     convert()
                 }}>
-                    <div className='w-full mb-1'>
+                    <div className='w-full mb-2'>
                         <InputBox 
                             label="From" 
                             amount={amount} 
                             currencyOptions={options} 
-                            onCUrrencyChange={(currency) => setAmount(amount)}
+                            onCUrrencyChange={(currency) => setFrom(currency)}
                             selectCurrency={from}
                             onAmountChange={(amount) => setAmount(amount)}
                         />
@@ -58,16 +58,16 @@ function App() {
                     </div>
                     <div>
                         <InputBox
-                            label='to'
+                            label='To'
                             amount={convertedAmt}
                             currencyOptions={options}
                             onCUrrencyChange={(currency) => setTo(currency)}
-                            selectCurrency={from}
+                            selectCurrency={to}
                             amountDisable
                         />
                     </div>
                     <div>
-                        <button type='submit' className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
+                        <button type='submit' className="w-full bg-blue-600 text-white px-4 py-3 mt-2 rounded-lg">
                             Convert {from.toUpperCase()} to {to.toUpperCase()} 
                         </button>
                     </div>
