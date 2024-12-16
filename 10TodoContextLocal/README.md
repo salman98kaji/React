@@ -1,5 +1,5 @@
 # React + Vite
-TodoForm-->
+App.jsx-->
 
 The 'addTodo'= function adds a new "todo" item to the todos state by updating it with a new array that includes the new item at the beginning. It takes a todo object as an argument, which represents the new item to add. Using setTodos, the function updates the state with a callback that receives the previous state (prev) and returns a new array. This new array starts with a newly created object that combines a unique id (generated using Date.now()) and the properties of the passed todo object (...todo), followed by the previous todos (...prev). For example, if the initial state is an empty array and addTodo({text: "Learn React", completed: false}) is called, the state is updated to include a new item like {id: 1234567890, text: "Learn React", completed: false} at the beginning. Repeated calls will prepend new items while retaining the previous ones in the array.
 
