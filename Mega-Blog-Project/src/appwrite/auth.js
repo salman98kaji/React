@@ -1,10 +1,12 @@
 import conf from "../conf/conf";
+//Client and Account from Appwrite SDK are used to interact with Appwrite's services.
 import { Client, Account, ID } from 'appwrite'
 
 export class AuthService {
     client = new Client();
     account;
 
+//The constructor sets up the client using configuration values (conf.appwriteUrl and conf.appwriteProjectId).
     constructor() {
         this.client
             .setEndpoint(conf.appwriteUrl)
@@ -49,6 +51,7 @@ export class AuthService {
             await this.account.deleteSessions();
         } catch (error) {
             console.log("Appwrite service :: logout :: error", error)
+            return false
         }
     }
 }
