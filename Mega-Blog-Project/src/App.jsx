@@ -7,6 +7,7 @@ import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom'
 
 function App() {
+  //Manages a local 'loading' state to track whether the app is still determining the current user's authentication status.
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
