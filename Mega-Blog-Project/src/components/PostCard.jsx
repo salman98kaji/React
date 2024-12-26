@@ -16,3 +16,11 @@ function PostCard({$id, title, featuredImage}) {
 }
 
 export default PostCard
+
+//This component is used to display a post card with the title and featured image of the post. The post card is a clickable link that redirects the user to the post details page.
+//The PostCard component receives the following props:
+// $id: unique identifier for the post
+// title: title of the post
+// featuredImage: ID of the featured image of the post
+//Wraps the card inside a Link component for navigation. Clicking the card redirects the user to the post detail page using the post's $id
+//Uses appwriteService.getFilePreview to fetch the preview URL of the featuredImage from Appwrite.

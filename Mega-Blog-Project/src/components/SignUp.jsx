@@ -12,7 +12,7 @@ function SignUp() {
     const naviagte = useNavigate()
     const [error, setError] = useState("")
 
-    const createAccount = async(data) => {
+    const create = async(data) => {
         setError("")
         try {
             const userData = await authService.createAccount(data)
@@ -44,7 +44,7 @@ function SignUp() {
             </Link>
         </p>
         {error && <p className='text-red-600 mt-8 text-center'>{error}</p>}
-        <form onSubmit={handleSubmit(createAccount)}>
+        <form onSubmit={handleSubmit(create)}>
             <div className='space-y-4 mt-8'>
                 <Input
                 label='name'
@@ -85,3 +85,5 @@ function SignUp() {
 }
 
 export default SignUp
+
+//Once a user signs up and their account is successfully created, they are automatically logged in. This eliminates the need for them to manually log in after signing up, providing a smoother and more user-friendly experience. The user's information is then stored in the Redux store using the login action from the authSlice. The user is then redirected to the home page using the useNavigate hook from react-router-dom. If there is an error during the sign-up process, the error message is displayed to the user. The form is validated using the react-hook-form library, ensuring that the user enters the required information in the correct format. The form data is then submitted to the create function, which creates the user account using the createAccount method from the authService. If the account is successfully created, the user is automatically logged in, and their information is stored in the Redux store.
