@@ -5,6 +5,7 @@ react-redux
 react-router-dom
 appwrite
 @tinymce/tinymce-react
+tinymce
 html-react-parser
 react-hook-form
 

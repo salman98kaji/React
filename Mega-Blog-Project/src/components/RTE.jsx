@@ -2,47 +2,66 @@
 import React from 'react'
 import { Editor } from '@tinymce/tinymce-react' 
 import {Controller} from 'react-hook-form'
+// Import TinyMCE assets
+import 'tinymce/tinymce'; // Core TinyMCE
+import 'tinymce/themes/silver/theme'; // Theme
+import 'tinymce/icons/default/icons'; // Default icons
 
-export default function RTE({name, control, defaultValue=''}) {
+// Import plugins (as needed)
+import 'tinymce/plugins/advlist';
+import 'tinymce/plugins/autolink';
+import 'tinymce/plugins/lists';
+import 'tinymce/plugins/link';
+import 'tinymce/plugins/image';
+import 'tinymce/plugins/charmap';
+//import 'tinymce/plugins/print';
+import 'tinymce/plugins/preview';
+import 'tinymce/plugins/fullscreen';
+import 'tinymce/plugins/code';
+import 'tinymce/plugins/help';
+import 'tinymce/plugins/table';
+
+export default function RTE({label, name, control, defaultValue=''}) {
   return (
     <div className='w-full'>
         {label && <label className='text-sm text-gray-600'>{label}</label>}
 
         <Controller 
-        name={name || 'editor'}
-        control={control}
-        render={({field: {onChange}}) =>(
+          name={name || 'editor'}
+          control={control}
+          render={({field: {onChange}}) =>(
             <Editor
-            initialValue={defaultValue}
-            init={{
-                initialValue: defaultValue,
-                height: 500,
-                menubar: true,
-                plugins: [
-                    "image",
-                    "advlist",
-                    "autolink",
-                    "autolink",
-                    "lists",
-                    "link",
-                    "image",
-                    "charmap",
-                    "preview",
-                    "anchor",
-                    "searchreplace",
-                    "visualblocks",
-                    "code",
-                    "fullscreen",
-                    "insertdatetime",
-                    "media",
-                    "table",
-                    "code",
-                    "help",
-                    "wordcount",
-                    "anchor",
-                ],
-                toolbar:"undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
-                content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+              initialValue={defaultValue}
+              init={{
+                  initialValue: defaultValue,
+                  height: 500,
+                  menubar: true,
+                  base_url:'/node_modules/tinymce',
+                  plugins: [
+                      "image",
+                      "advlist",
+                      "autolink",
+                      "autolink",
+                      "lists",
+                      "link",
+                      "image",
+                      "charmap",
+                      "preview",
+                      "anchor",
+                      "searchreplace",
+                      "visualblocks",
+                      "code",
+                      "fullscreen",
+                      "insertdatetime",
+                      "media",
+                      "table",
+                      "code",
+                      "help",
+                      "wordcount",
+                      "anchor",
+                  ],
+                  toolbar:"undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
+                  content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
             }}
             onEditorChange={onChange}
             />
