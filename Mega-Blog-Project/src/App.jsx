@@ -20,13 +20,14 @@ function App() {
       }
     })
     .finally(() => setLoading(false))
-  },[])
+  },[]) //Empty dependency array ensures this runs once when the component first mounts.
+
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+    <div className=' min-h-screen flex flex-wrap content-between bg-gray-400 '>
       <div className='w-full block'>
         <Header />
         <main>
-          Your Blogposts<Outlet/>
+          <Outlet/>
         </main>
         <Footer />
       </div>
@@ -35,3 +36,6 @@ function App() {
 }
 
 export default App
+
+
+//The authentication check involves interacting with external services (like an API or auth service), which is considered a "side effect" in React. useEffect is designed specifically for handling such cases.

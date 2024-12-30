@@ -2,18 +2,31 @@ import React from 'react'
 import service from '../../appwrite/config'
 import Container from '../container/Container'
 import PostCard from '../PostCard'
+import { useSelector } from 'react-redux'
 
 function Home() {
+    const isAuthenticated = useSelector((state) => state.auth.status)
+    const [loading, setLoading] = React.useState(true)
     const [posts, setPosts] = React.useState([])
     React.useEffect(() => {
-        service.getPosts().then((post) => {
-            if(post) {
-                setPosts(post.documents)
-            }
-        })
-    }, [])
+        if(isAuthenticated) {
+            service.getPosts().then((post) => {
+                if(post){
+                    setPosts(post.documents)
+                }
+            })
+            .finally(() => setLoading(false));
+        } else {
+            setPosts([]); //Clear posts if user is not authenticated
+            setLoading(false)
+        }
+    }, [isAuthenticated])
+
+    if (loading) {
+        return <div className="text-center">Loading posts...</div>;
+    }
     
-    if(posts.length === 0) {
+    if(!isAuthenticated || posts.length === 0) {
         return (
             <div className='w-full py-8 mt-4 text-center'>
                 <Container>

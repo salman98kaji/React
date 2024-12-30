@@ -14,7 +14,7 @@ import AddPost from './components/pages/AddPost'
 import EditPost from './components/pages/EditPost'  
 import Post from './components/pages/Post'
 
-
+//createBrowserRouter:This is used to define the routing logic for your application. It maps URL paths to specific components (or pages).
 const router = createBrowserRouter([
   {
     path: '/',
@@ -81,5 +81,7 @@ createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </ Provider>
-  </StrictMode>,
+  </StrictMode>
 )
+
+//Once you have created the store, you need to provide it to your React application using the Provider component from react-redux. This allows your components to access the store's state and dispatch actions. The Provider component makes the store available to all components in your app.
