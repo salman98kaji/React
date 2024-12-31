@@ -19,7 +19,7 @@ function Login() {
             if(session){
                 const userData = await authService.getCurrentUser()
                 if(userData){
-                    dispatch(authLogin(userData))
+                    dispatch(authLogin({userData}))
                     navigate('/')
                 }
             }
@@ -29,7 +29,7 @@ function Login() {
     }
 
   return (
-    <div className='flex items-center justify-center w-full'>
+    <div className='flex items-center justify-center w-full py-8'>
         <div className={`w-full max-w-lg mx-auto bg-gray-100 rounded-xl p-8 border-black/10`}>
             <div className='mb-4 flex items-center justify-center'>
                 <span className='inline-block w-full max-w-[100px]'>

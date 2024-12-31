@@ -11,8 +11,9 @@ function Header() {
     {
       name: 'Home',
       slug: '/',
-      active: true //home item is always displayed
+      active: authStatus //if the user is authenticated, the home item is displayed
     },
+    
     {
       name:'Login',
       slug: '/login',

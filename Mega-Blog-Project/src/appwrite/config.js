@@ -77,13 +77,17 @@ export class Service {
         }
     }
 
-    async getPosts() {
+    async getPosts(userId) {
         try {
-           return await this.databases.listDocuments(
+            if (!userId) {
+                throw new Error("User ID is required to fetch posts");
+            }
+            return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 [
-                    Query.equal('status','active')
+                    Query.equal('status','active'),
+                    Query.equal('userId',userId)
                 ]
            ) 
         } catch (error) {
@@ -119,11 +123,17 @@ export class Service {
         }
     }
 
-    getFilePreview(fileId) {
-        return this.bucket.getFilePreview(
-            conf.appwriteBucketId,
-            fileId
-        )
+    async getFilePreview(fileId) {
+        if (!fileId) {
+            console.log("File ID is missing.");
+            return null; // Return null if the fileId is missing or invalid
+          }
+        try {
+            return await this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+        } catch (error) {
+            console.log("Error fetching file preview:", error);
+        return null;
+        }    
     }
 }
 

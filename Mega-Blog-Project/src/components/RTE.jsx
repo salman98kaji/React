@@ -24,7 +24,7 @@ import 'tinymce/plugins/table';
 export default function RTE({label, name, control, defaultValue=''}) {
   return (
     <div className='w-full'>
-        {label && <label className='text-sm text-gray-600'>{label}</label>}
+        {label && <label className='text-white text-xl'>{label}</label>}
 
         <Controller 
           name={name || 'editor'}

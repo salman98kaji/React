@@ -67,7 +67,7 @@ function PostForm({post}) {
 
   return (
     <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
-      <div className='w-2/3 px-2'>
+      <div className='w-2/3 px-2 text-green-400 text-xl'>
         <Input 
           label='Title: ' 
           placeholder='Title' 
@@ -90,11 +90,11 @@ function PostForm({post}) {
           defaultValue={getValues('content')} 
         />    
       </div>
-      <div className='w-1/3 px-2'>
+      <div className='w-1/3 px-2 text-white text-xl'>
         <Input 
           label='Featured Image: ' 
           type='file'
-          className='mb-4' 
+          className='mb-11' 
           accept='image/*'
           {...register('image',{required : !post})}
         />

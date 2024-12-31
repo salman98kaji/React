@@ -1,15 +1,24 @@
 import {useState, useEffect} from 'react'
 import service from '../../appwrite/config'
 import {Container, PostCard} from '..'
+import { useSelector } from 'react-redux'
 
 function AllPost() {
   const [posts, setPosts] = useState([])
-  useEffect(() => {},[])
-  service.getPosts([]).then((posts) => {
-    if(posts){
-      setPosts(posts.documents) 
+  const userid = useSelector((state) => state.auth.userData?.$id)
+
+  useEffect(() => {
+    if(userid) {
+      service.getPosts(userid).then((res) =>{
+        if(res){
+          setPosts(res.documents)
+        }
+      }).catch((error) => {
+        console.error("Error fetching posts:", error)
+      })
     }
-  })
+  },[userid])
+  
 
   return (
     <div className='w-full py-8'>

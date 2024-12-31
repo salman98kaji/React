@@ -1,13 +1,33 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import service from '../appwrite/config'
 import {Link} from 'react-router-dom'
 
 function PostCard({$id, title, featuredImage}) {
+  const [filePreview, setFilePreview] = useState(null);
+
+  useEffect(() => {
+    if (featuredImage) {
+      service.getFilePreview(featuredImage)
+        .then((previewUrl) => {
+          if (previewUrl) {
+            setFilePreview(previewUrl);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching file preview:', error);
+        });
+    }
+  }, [featuredImage]);
+
   return (
     <Link to={`/post/${$id}`} >
         <div className='w-full bg-white rounded-lg p-4 shadow-md'>  
             <div className='w-full justify-center mb-4'>
-                <img src={service.getFilePreview(featuredImage)} alt={title} className='rounded-lg'/>
+              {filePreview ? (
+                <img src={filePreview} alt={title} className='rounded-lg'/>
+              ) : (
+                <div>Image not available</div>
+              )}   
             </div>
             <h2 className='text-xl font-bold'>{title}</h2>
         </div>

@@ -23,7 +23,7 @@ function App() {
   },[]) //Empty dependency array ensures this runs once when the component first mounts.
 
   return !loading ? (
-    <div className=' min-h-screen flex flex-wrap content-between bg-gray-400 '>
+    <div className=' min-h-screen flex flex-wrap content-between bg-image'>
       <div className='w-full block'>
         <Header />
         <main>
