@@ -6,9 +6,11 @@ function PostCard({$id, title, featuredImage}) {
   const [filePreview, setFilePreview] = useState(null);
 
   useEffect(() => {
+    console.log('Featured Image ID:', featuredImage);
     if (featuredImage) {
       service.getFilePreview(featuredImage)
         .then((previewUrl) => {
+          console.log('Preview URL:', previewUrl);
           if (previewUrl) {
             setFilePreview(previewUrl);
           }

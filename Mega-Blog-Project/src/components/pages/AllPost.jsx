@@ -23,10 +23,15 @@ function AllPost() {
   return (
     <div className='w-full py-8'>
       <Container>
-        <div className='flex flex-wrap -mx-4'>
+        <div className='flex flex-wrap justify-center items-center -mx-4 '>
           {posts.map((post) => (
-            <div key={post.$id} className='p-2 w-1/4'>
-              <PostCard post={post} />
+            <div key={post.$id} className='py-6 px-10'>
+              <PostCard 
+              key={post.$id} 
+              $id={post.$id} 
+              title={post.title} 
+              featuredImage={post.featuredImage} 
+            />
             </div>
           ))}
         </div>

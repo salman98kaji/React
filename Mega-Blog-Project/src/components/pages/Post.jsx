@@ -11,7 +11,7 @@ export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
-
+    const [imagePreview, setImagePreview] = useState(null); // New state for the image preview URL
     const userData = useSelector((state) => state.auth.userData);
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
@@ -19,8 +19,17 @@ export default function Post() {
     useEffect(() => {
         if (slug) {
             service.getPost(slug).then((post) => {
-                if (post) setPost(post);
-                else navigate("/");
+                if (post) {
+                    setPost(post);
+                    if (post.featuredImage) {
+                        service
+                            .getFilePreview(post.featuredImage)
+                            .then((url) => setImagePreview(url))
+                            .catch((err) => console.error("Error fetching image preview:", err));
+                    }
+                } else {
+                    navigate("/");
+                }
             });
         } else navigate("/");
     }, [slug, navigate]);
@@ -38,12 +47,16 @@ export default function Post() {
         <div className="py-8">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-                    <img
-                        src={service.getFilePreview(post.featuredImage)}
-                        alt={post.title}
-                        className="rounded-xl"
-                    />
-
+                    {imagePreview ? (
+                        <img
+                            src={imagePreview}
+                            alt={post.title}
+                            className="rounded-xl"
+                        />
+                    ) : (
+                        <div>Loading image...</div>
+                    )}
+                    
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
